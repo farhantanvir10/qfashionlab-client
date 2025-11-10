@@ -15,7 +15,7 @@ function EditProduct() {
         const token = localStorage.getItem('token');
         try {
             await axiosInstance.put(
-                `/sellerProductUpload/products/${product._id}`,
+                `/products/${product._id}`,
                 {
                     productCode,
                     productCategory,
@@ -39,7 +39,10 @@ function EditProduct() {
             <h2 className="text-center text-3xl font-semibold mb-4">Edit Product</h2>
             <div className="md:flex gap-6">
                 <img
-                    src={product.productImage || 'https://via.placeholder.com/150'}
+                    src={
+                        product.productImage ||
+                        'https://placeholdit.com/400?text=Q%20Fashion%20Lab&font_size=40'
+                    }
                     alt={product.productCode}
                     className="w-full md:w-1/2 h-full object-cover object-center mb-4"
                 />
@@ -72,10 +75,7 @@ function EditProduct() {
                     </div>
 
                     <div className="flex justify-end mt-4">
-                        <button
-                            className="bg-blue-500 p-2 rounded"
-                            onClick={handleUpdate}
-                        >
+                        <button className="bg-blue-500 p-2 rounded" onClick={handleUpdate}>
                             Update Product
                         </button>
                         <button

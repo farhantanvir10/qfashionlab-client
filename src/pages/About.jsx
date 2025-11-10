@@ -7,7 +7,7 @@ function About() {
     }, [window.location.href]);
 
     return (
-        <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center py-12 px-4 ">
+        <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center py-12 px-2 md:px-10">
             <div className="max-w-3xl mx-auto ">
                 <h1 className="text-4xl text-center font-bold text-gray-200 mb-4">About Us</h1>
                 <div className="flex flex-col gap-4 text-justify mt-8 text-gray-200">

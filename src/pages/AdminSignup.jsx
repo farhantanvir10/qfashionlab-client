@@ -23,10 +23,7 @@ function AdminSignup() {
         }
 
         try {
-            const response = await axiosInstance.post(
-                '/sellerLogin/register',
-                data
-            );
+            const response = await axiosInstance.post('/admin/register', data);
             if (response.data) {
                 setData({ name: '', email: '', password: '' });
                 setConfirmPassword('');
@@ -45,7 +42,7 @@ function AdminSignup() {
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="p-8 rounded-2xl border border-gray-500 shadow-md shadow-black w-96">
-                <h2 className="text-2xl font-semibold text-center">Create an account for Seller</h2>
+                <h2 className="text-2xl font-semibold text-center">Create an account for admin</h2>
                 <p className=" text-center mb-4">Enter your details below</p>
 
                 {error && <p className="text-red-500 text-center">{error}</p>}
@@ -86,7 +83,7 @@ function AdminSignup() {
 
                     <button
                         type="submit"
-                        className="w-full bg-red-500 text-white p-3 rounded-md font-semibold"
+                        className="w-full bg-red-500 text-white cursor-pointer p-3 rounded-md font-semibold"
                     >
                         Create Account
                     </button>
@@ -94,7 +91,7 @@ function AdminSignup() {
 
                 <p className=" text-center mt-4">
                     Already have an account?{' '}
-                    <Link to="/seller-login" className="font-semibold">
+                    <Link to="/admin-login" className="font-semibold">
                         Login
                     </Link>
                 </p>

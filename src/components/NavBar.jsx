@@ -52,7 +52,7 @@ function NavBar() {
             `}</style>
 
             {/* Main Navigation */}
-            <nav className="flex items-center justify-between md:px-10">
+            <nav className="flex items-center justify-between px-2 md:px-10">
                 {/* Logo Section */}
                 <div className="flex items-center gap-3 flex-shrink-0">
                     <Link to="/" className="flex items-center gap-2">

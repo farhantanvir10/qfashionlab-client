@@ -6,8 +6,13 @@ const Cards = ({ products }) => {
     return (
         <>
             {products.length > 0 && (
-                <div className={`p-3 sm:p-5 md:px-10 border-b border-gray-500`} id={products[0].productCategory[0]}>
-                    <h2 className={`lg:w-1/3 rounded-bl-3xl rounded-tr-3xl p-1 bg-[#1E3A5F] border border-gray-600 select-none shadow-md shadow-black text-3xl font-semibold text-center mb-4`}>
+                <div
+                    className={`p-3 sm:p-5 md:px-10 border-b border-gray-500`}
+                    id={products[0].productCategory[0]}
+                >
+                    <h2
+                        className={`lg:w-1/3 rounded-bl-3xl rounded-tr-3xl p-1 bg-[#1E3A5F] border border-gray-600 select-none shadow-md shadow-black text-3xl font-semibold text-center mb-4`}
+                    >
                         {products[0].productCategory}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 mb-4">
@@ -18,7 +23,10 @@ const Cards = ({ products }) => {
                                 onClick={() => navigate(`/product/${product._id}`)}
                             >
                                 <img
-                                    src={product.productImage || 'https://via.placeholder.com/150'}
+                                    src={
+                                        product.productImage ||
+                                        'https://placeholdit.com/400?text=Q%20Fashion%20Lab&font_size=40'
+                                    }
                                     alt={product.productCode}
                                     className="w-full h-60 object-cover object-center"
                                 />

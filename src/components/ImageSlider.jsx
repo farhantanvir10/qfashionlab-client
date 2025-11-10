@@ -6,9 +6,10 @@ import leaf from "../assets/leaf.jpg";
 import mesh from "../assets/mesh.jpg";
 import pp from "../assets/pp.jpg";
 import honey from "../assets/honeycomb.jpeg";
+import jacquard from "../assets/jacquard.jpeg";
 
 const ImageSlider = () => {
-  const images = [box, leaf, mesh, pp, honey];
+  const images = [box, leaf, mesh, pp, honey, jacquard];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [touchStartX, setTouchStartX] = useState(null);
