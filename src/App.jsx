@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
-import SellerNavBar from './components/SellerNavBar';
+import AdminNavBar from './components/AdminNavBar';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
@@ -15,7 +15,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminView from './pages/AdminView';
 import AdminAddProduct from './pages/AdminAddProduct';
 import EditProduct from './pages/EditProduct';
-import SellerResetPassword from './pages/SellerResetPassword';
+import AdminResetPassword from './pages/AdminResetPassword';
 function AppContent() {
     const location = useLocation();
     const [searchQuery, setSearchQuery] = useState('');
@@ -24,21 +24,19 @@ function AppContent() {
         '/admin-add-product',
         '/admin-view',
         '/admin',
-        '/seller-login',
-        '/seller-signup',
-        '/seller-reset-password',
+        '/admin-login',
+        '/admin-signup',
+        '/admin-reset-password',
         '/edit/:id',
     ];
-    const sellerRoutes = ['/seller-login', '/seller-signup', '/seller-reset-password', '/edit/:id'];
 
     const isAdminPage = adminRoutes.includes(location.pathname);
-    const isSellerPage = sellerRoutes.includes(location.pathname);
     const isEditProductPage = location.pathname.startsWith('/edit/');
 
     return (
         <>
             {!isAdminPage && !isEditProductPage && <NavBar setSearchQuery={setSearchQuery} />}
-            {(isAdminPage || isEditProductPage) && !isSellerPage && <SellerNavBar />}
+            {(isAdminPage || isEditProductPage) && <AdminNavBar />}
 
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -46,13 +44,13 @@ function AppContent() {
                 <Route path="/about" element={<About />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 {/* Admin Routes */}
-                <Route path="/seller-signup" element={<AdminSignup />} />
-                <Route path="/seller-login" element={<AdminLogin />} />
+                <Route path="/admin-signup" element={<AdminSignup />} />
+                <Route path="/admin-login" element={<AdminLogin />} />
                 <Route path="/admin" element={<AdminView />} />
                 <Route path="/admin-add-product" element={<AdminAddProduct />} />
                 <Route path="/edit/:id" element={<EditProduct />} />
                 <Route path="/admin-view" element={<AdminView />} />
-                <Route path="/seller-reset-password" element={<SellerResetPassword />} />
+                <Route path="/admin-reset-password" element={<AdminResetPassword />} />
             </Routes>
 
             {!isAdminPage && !isEditProductPage && <Footer />}

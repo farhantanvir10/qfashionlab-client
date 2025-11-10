@@ -13,7 +13,7 @@ function AdminLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const log = await axiosInstance.post('/sellerLogin/login', data);
+            const log = await axiosInstance.post('/admin/login', data);
 
             if (log.status === 200 && log.data.token) {
                 localStorage.setItem('token', log.data.token);
@@ -35,7 +35,7 @@ function AdminLogin() {
         <div className="flex justify-center items-center h-screen">
             <div className="p-8 rounded-2xl border border-gray-500 shadow-md shadow-black w-96">
                 <img src={logo} className="w-30 h-30 ml-24" />
-                <h2 className="text-2xl font-semibold text-center">Seller Sign In</h2>
+                <h2 className="text-2xl font-semibold text-center">admin Sign In</h2>
                 <p className="text-center mb-4">Enter your details below</p>
 
                 <form className="space-y-4" onSubmit={handleSubmit}>
@@ -68,13 +68,13 @@ function AdminLogin() {
 
                 <p className="text-center mt-4">
                     Create an account?{' '}
-                    <Link to="/seller-signup" className="font-semibold">
+                    <Link to="/admin-signup" className="font-semibold">
                         Create
                     </Link>
                 </p>
                 <p className="text-center mt-4">
                     Redet password?{' '}
-                    <Link to="/seller-reset-password" className="font-semibold">
+                    <Link to="/admin-reset-password" className="font-semibold">
                         Reset
                     </Link>
                 </p>

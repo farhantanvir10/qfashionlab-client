@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { axiosInstance } from "../lib/axios";
+import { useState } from 'react';
+import { axiosInstance } from '../lib/axios';
 
 function AdminAddProduct() {
     const [formData, setFormData] = useState({
-        productCode: "",
-        productCategory: "Feature Design",
+        productCode: '',
+        productCategory: 'Feature Design',
         productImage: null,
     });
 
     const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,7 +27,7 @@ function AdminAddProduct() {
     const validateForm = () => {
         const { productCode, productCategory, productImage } = formData;
         if (!productCode || !productCategory || !productImage) {
-            return "All fields are required!";
+            return 'All fields are required!';
         }
         return null;
     };
@@ -41,49 +41,51 @@ function AdminAddProduct() {
         }
 
         setLoading(true);
-        setMessage("");
+        setMessage('');
 
         const productData = new FormData();
-        productData.append("productCode", formData.productCode.toUpperCase());
-        productData.append("productCategory", formData.productCategory);
-        productData.append("productImage", formData.productImage);
+        productData.append('productCode', formData.productCode.toUpperCase());
+        productData.append('productCategory', formData.productCategory);
+        productData.append('productImage', formData.productImage);
 
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         if (!token) {
-            setMessage("Authentication failed! Please log in.");
+            setMessage('Authentication failed! Please log in.');
             setLoading(false);
             return;
         }
 
         try {
-            await axiosInstance.post("/sellerProductUpload/products", productData, {
+            await axiosInstance.post('/products', productData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setMessage("Product uploaded successfully!");
+            setMessage('Product uploaded successfully!');
             setFormData({
-                productCode: "",
-                productCategory: "Feature Design",
+                productCode: '',
+                productCategory: 'Feature Design',
                 productImage: null,
             });
             setImagePreview(null);
         } catch (error) {
-            console.error("Upload error:", error);
-            setMessage(error.response?.data?.error || "Error uploading product. Try again!");
+            console.error('Upload error:', error);
+            setMessage(error.response?.data?.error || 'Error uploading product. Try again!');
         }
 
         setLoading(false);
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-6 sm:border border-gray-500 sm:shadow-md shadow-black sm:rounded-lg md:mt-6">
+        <div className="max-w-2xl mx-auto p-6 sm:border border-gray-500 sm:shadow-md shadow-black sm:rounded-lg sm:mt-6">
             <h2 className="text-2xl text-center font-bold mb-4">Add Product</h2>
 
             {message && (
                 <p
                     className={`text-center ${
-                        message == "Product uploaded successfully!" ? "text-green-500" : "text-red-500"
+                        message == 'Product uploaded successfully!'
+                            ? 'text-green-500'
+                            : 'text-red-500'
                     }`}
                 >
                     {message}
@@ -119,9 +121,9 @@ function AdminAddProduct() {
                                 onChange={handleChange}
                                 className="w-full p-2 border border-gray-500 rounded"
                             >
-                                <option value="Feature Design">Feature Design</option>
-                                <option value="Previously Ordered">Previously Ordered</option>
-                                <option value="Customer Satisfaction">Customer Satisfaction</option>
+                                <option className='bg-[#1E3A5F]' value="Feature Design">Feature Design</option>
+                                <option className='bg-[#1E3A5F]' value="Previously Ordered">Previously Ordered</option>
+                                <option className='bg-[#1E3A5F]' value="Customer Satisfaction">Customer Satisfaction</option>
                             </select>
                         </div>
                     </div>
@@ -129,7 +131,11 @@ function AdminAddProduct() {
                         <label className="block">Product Image</label>
                         <div className="border border-gray-500 p-4 rounded-lg text-center">
                             {imagePreview ? (
-                                <img src={imagePreview} alt="Preview" className="w-full h-60 object-cover rounded-md" />
+                                <img
+                                    src={imagePreview}
+                                    alt="Preview"
+                                    className="w-full h-60 object-cover rounded-md"
+                                />
                             ) : (
                                 <div className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-gray-500 rounded-md">
                                     <span className="">Upload an image</span>
@@ -145,8 +151,12 @@ function AdminAddProduct() {
                     </div>
                 </div>
 
-                <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded" disabled={loading}>
-                    {loading ? "Uploading..." : "ADD"}
+                <button
+                    type="submit"
+                    className="w-full bg-blue-600 text-white p-2 rounded cursor-pointer"
+                    disabled={loading}
+                >
+                    {loading ? 'Uploading...' : 'ADD'}
                 </button>
             </form>
         </div>

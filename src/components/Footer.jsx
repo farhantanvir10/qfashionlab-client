@@ -40,7 +40,7 @@ function Footer() {
     };
     return (
         <div className="" style={backgroundStyle}>
-            <div className="text-white py-15 px-6 md:px-10" style={overlayStyle}>
+            <div className="text-white py-15 px-2 md:px-10" style={overlayStyle}>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-sm text-center">
                     <div className="sm:text-left">
                         <h2 className="text-lg font-bold mb-3">Support</h2>

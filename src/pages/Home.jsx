@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { axiosInstance } from "../lib/axios";
-import { Link } from "react-router-dom";
-import Cards from "../components/Cards";
-import size from "../assets/size-chart.png";
+import { useEffect, useState } from 'react';
+import { axiosInstance } from '../lib/axios';
+import Cards from '../components/Cards';
+import size from '../assets/size-chart.png';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -12,10 +11,10 @@ const Home = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axiosInstance.get("/sellerProductUpload/getAllProducts");
+                const response = await axiosInstance.get('/getAllProducts');
                 setProducts(response.data);
             } catch (err) {
-                setError("Failed to fetch products");
+                setError('Failed to fetch products');
             } finally {
                 setLoading(false);
             }
@@ -25,26 +24,26 @@ const Home = () => {
 
     // 👇 Scroll to top smoothly when a new product loads
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [products]);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
         const offset = 70; // adjust for fixed navbar height
         const top = element.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: "smooth" });
+        window.scrollTo({ top, behavior: 'smooth' });
     };
 
     const featureDesign = products.filter((product) => {
-        const categoryMatch = product.productCategory === "Feature Design";
+        const categoryMatch = product.productCategory === 'Feature Design';
         return categoryMatch;
     });
     const previouslyOrdered = products.filter((product) => {
-        const categoryMatch = product.productCategory === "Previously Ordered";
+        const categoryMatch = product.productCategory === 'Previously Ordered';
         return categoryMatch;
     });
     const customerSatisfaction = products.filter((product) => {
-        const categoryMatch = product.productCategory === "Customer Satisfaction";
+        const categoryMatch = product.productCategory === 'Customer Satisfaction';
         return categoryMatch;
     });
 
@@ -62,6 +61,24 @@ const Home = () => {
             </div>
         );
     }
+    const handleWhatsAppOrder = () => {
+        // Your WhatsApp Business number (international format, no + or spaces)
+        const phoneNumber = '+8801613983510';
+
+        // Pre-fill message with product details – make it shop-ready!
+        const message = `Hi! I'd like to order this custom design! 😊`;
+
+        // Encode the message for URL safety
+        const encodedMessage = encodeURIComponent(message);
+
+        // Build the WhatsApp URL
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+        // Open in new tab (works on mobile/desktop)
+        window.open(whatsappUrl, '_blank');
+        // console.log(message);
+    };
+
     return (
         <div className="min-h-screen relative">
             {/* Hero Section */}
@@ -77,22 +94,28 @@ const Home = () => {
                     {/* Quick Links */}
                     <div className="grid grid-cols-1 sm:w-[32vw] text-sm font-semibold gap-1 items-center justify-center">
                         <button
-                            onClick={() => scrollToSection("F")}
+                            onClick={() => scrollToSection('F')}
                             className="px-4 py-1 sm:p-1 bg-[#1E3A5F] border border-gray-600 rounded-bl-2xl rounded-tr-2xl hover:bg-gray-900"
                         >
                             Feature Design
                         </button>
                         <button
-                            onClick={() => scrollToSection("P")}
+                            onClick={() => scrollToSection('P')}
                             className="px-4 py-1 sm:p-1 bg-[#1E3A5F] border border-gray-600 rounded-bl-2xl rounded-tr-2xl hover:bg-gray-900"
                         >
                             Previously Ordered
                         </button>
                         <button
-                            onClick={() => scrollToSection("C")}
+                            onClick={() => scrollToSection('C')}
                             className="px-4 py-1 sm:p-1 bg-[#1E3A5F] border border-gray-600 rounded-bl-2xl rounded-tr-2xl hover:bg-gray-900"
                         >
                             Customer Satisfaction
+                        </button>
+                        <button
+                            onClick={handleWhatsAppOrder}
+                            className="px-4 py-1 sm:p-1 bg-[#1E3A5F] border border-gray-600 rounded-bl-2xl rounded-tr-2xl hover:bg-gray-900"
+                        >
+                            Custom Design Request
                         </button>
                     </div>
                 </div>

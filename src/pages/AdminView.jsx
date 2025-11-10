@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { axiosInstance } from "../lib/axios";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import { axiosInstance } from '../lib/axios';
 
 function AdminView() {
     const [products, setProducts] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,23 +17,23 @@ function AdminView() {
 
     // 👇 Scroll to top smoothly when a new product loads
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [window.location.href]);
 
     const fetchProducts = async () => {
         setLoading(true);
-        setError("");
-        const token = localStorage.getItem("token");
+        setError('');
+        const token = localStorage.getItem('token');
 
         if (!token) {
-            setError("No token found. Please log in.");
+            setError('No token found. Please log in.');
             setLoading(false);
-            navigate("/seller-login");
+            navigate('/admin-login');
             return;
         }
         ///
         try {
-            const response = await axiosInstance.get("/sellerProductUpload/products", {
+            const response = await axiosInstance.get('/products', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -44,29 +44,29 @@ function AdminView() {
             } else if (response.data.products && Array.isArray(response.data.products)) {
                 setProducts(response.data.products);
             } else {
-                setError("Invalid data format from API");
+                setError('Invalid data format from API');
             }
         } catch (error) {
-            console.error("Error fetching products:", error);
-            setError("Failed to fetch products.");
+            console.error('Error fetching products:', error);
+            setError('Failed to fetch products.');
         }
         setLoading(false);
     };
 
     const handleDelete = async (id) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+        const confirmDelete = window.confirm('Are you sure you want to delete this product?');
         if (!confirmDelete) return; // ❌ Stop if user clicks "Cancel"
 
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         try {
-            await axiosInstance.delete(`/sellerProductUpload/products/${id}`, {
+            await axiosInstance.delete(`/products/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setProducts(products.filter((product) => product._id !== id));
             // alert('Product Deleted');
         } catch (error) {
-            console.error("Delete error:", error);
-            setError("Failed to delete product.");
+            console.error('Delete error:', error);
+            setError('Failed to delete product.');
         }
     };
 
@@ -112,7 +112,9 @@ function AdminView() {
                                 />
                                 <div className="flex justify-between items-center mx-2 my-4">
                                     <h3 className="text-lg font-semibold">{product.productCode}</h3>
-                                    <h3 className="text-lg font-semibold">{product.productCategory}</h3>
+                                    <h3 className="text-lg font-semibold">
+                                        {product.productCategory}
+                                    </h3>
                                 </div>
 
                                 <div className="flex justify-between items-center mt-2">
